@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Collapsible Content plugin
@@ -24,3 +23,9 @@
  */
 
 namespace SB2Media\CollapsibleContent;
+
+if( ! defined( 'ABSPATH' ) ) {
+    exit( "There's nothing to see here.");
+}
+
+include( __DIR__ . '/src/shortcode/shortcodes.php' );
