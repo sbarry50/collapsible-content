@@ -102,7 +102,7 @@ module.exports = function ( moduleRoot ) {
 	};
 
 	var distFilenames = {
-		concatScripts: 'jquery.project.js'
+		concatScripts: 'jquery.plugin.js'
 	};
 
 	/************************************
