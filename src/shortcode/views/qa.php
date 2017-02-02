@@ -5,7 +5,7 @@
       </span>
       <?php esc_html_e($attributes['question']); ?>
   </dt>
-  <dl class="collapsible-content--hidden" itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer" style="display: none;">
+  <dd class="collapsible-content--hidden" itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer" style="display: none;">
       <?php echo $hidden_content; ?>
-  </dl>
+  </dd>
 </dl>

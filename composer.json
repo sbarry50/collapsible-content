@@ -1,0 +1,15 @@
+{
+    "name": "sbarry50/collapsible-content",
+    "description": "Composer",
+    "type": "project",
+    "license": "GPL2",
+    "authors": [
+        {
+            "name": "Steve",
+            "email": "sbarry50@gmail.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^5.7"
+    }
+}
