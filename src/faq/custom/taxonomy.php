@@ -26,6 +26,8 @@ function register_custom_taxonomy() {
 		'labels'            => get_taxonomy_labels_config( 'Topic', 'Topics', FAQ_MODULE_TEXT_DOMAIN ),
 		'hierarchical'      => true,
 		'show_admin_column' => true,
+		'public'            => false,
+		'show_ui'           => true,
 	);
 	register_taxonomy( 'topic', array( 'faq' ), $args );
 }

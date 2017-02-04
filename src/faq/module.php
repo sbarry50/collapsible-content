@@ -12,6 +12,7 @@
 namespace SB2Media\Module\FAQ;
 
 define( 'FAQ_MODULE_TEXT_DOMAIN', 'COLLAPSIBLE_CONTENT_TEXT_DOMAIN' );
+define( 'FAQ_MODULE_DIR', __DIR__ );
 
 /**
  * Autoload plugin files.

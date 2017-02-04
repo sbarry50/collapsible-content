@@ -71,6 +71,7 @@ function get_posts_grouped_by_term( $post_type_name, $taxonomy_name ) {
 			'post_id'      => $post_id,
 			'post_title'   => $record->post_title,
             'post_content' => $record->post_content,
+            'menu_order'   => $record->menu_order,
 		);
 	}
 

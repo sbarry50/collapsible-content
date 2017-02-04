@@ -57,16 +57,18 @@ function process_the_shortcode( $user_defined_attributes, $content, $shortcode_n
  * @return void
  */
 function render_single_faq( array $attributes, array $config ) {
-        $faq = get_post( $attributes['post_id'] );
+    $faq = get_post( $attributes['post_id'] );
 
-        if( ! $faq ) {
-            return render_none_found_message( $attributes );
-        }
+    if( ! $faq ) {
+        return render_none_found_message( $attributes );
+    }
 
-        $post_title = $faq->post_title;
-        $hidden_content = do_shortcode( $faq->post_content );
+    $use_term_container = false;
+    $is_calling_source = 'shortcode-single-faq';
+    $post_title = $faq->post_title;
+    $hidden_content = do_shortcode( $faq->post_content );
 
-        include( $config['views']['container_single'] );
+    include( $config['views']['container_single'] );
 }
 
 /**
@@ -78,30 +80,33 @@ function render_single_faq( array $attributes, array $config ) {
  * @return void
  */
 function render_topic_faqs( array $attributes, array $config ) {
-        $config_args = array(
-            // records to get back
-            'posts_per_page' => (int) $attributes['number_of_faqs'],
-            'nopaging'       => true,
-            'post_type'      => 'faq',
-            'tax_query'      => array(
-                array(
-                    'taxonomy'   => 'topic',
-                    'field'      => 'slug',
-                    'terms'      => $attributes['topic'],
-                ),
+    $config_args = array(
+        // records to get back
+        'posts_per_page' => (int) $attributes['number_of_faqs'],
+        'nopaging'       => true,
+        'post_type'      => 'faq',
+        'tax_query'      => array(
+            array(
+                'taxonomy'   => 'topic',
+                'field'      => 'slug',
+                'terms'      => $attributes['topic'],
             ),
-            'order'            => 'ASC',
-            'orderby'          => 'menu_order',
-        );
+        ),
+        'order'            => 'ASC',
+        'orderby'          => 'menu_order',
+    );
 
-        $query = new \WP_Query( $config_args );
-        if ( ! $query->have_posts() ) {
-            return render_none_found_message( $attributes, false );
-        }
+    $query = new \WP_Query( $config_args );
+    if ( ! $query->have_posts() ) {
+        return render_none_found_message( $attributes, false );
+    }
 
-        include( $config['views']['container_topic'] );
+    $use_term_container = true;
+    $is_calling_source = 'shortcode-by-topic';
+    $term_slug = $attributes['topic'];
+    include( $config['views']['container_topic'] );
 
-        wp_reset_postdata();
+    wp_reset_postdata();
 }
 
 /**
@@ -158,9 +163,9 @@ function render_none_found_message( array $attributes, $is_single_faq = true ) {
 function get_shortcode_configuration() {
     return array(
         'views'         => array(
-            'container_single' => __DIR__ . '/views/container-single.php',
-            'container_topic'  => __DIR__ . '/views/container-topic.php',
-            'faq'              => __DIR__ . '/views/faq.php',
+            'container_single' => FAQ_MODULE_DIR . '/views/container.php',
+            'container_topic'  => FAQ_MODULE_DIR . '/views/container.php',
+            'faq'              => FAQ_MODULE_DIR . '/views/faq.php',
         ),
         'defaults'      => array(
             'show_icon'               => 'dashicons dashicons-arrow-down-alt2',
